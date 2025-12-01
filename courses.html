@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Courses - LearnSpace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-graduation-cap"></i> LearnSpace
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="courses.html" class="active">Courses</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="login.html" class="btn btn-primary">Login / Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="dashboard-layout">
+            <aside class="filters-section">
+                <div class="filter-group">
+                    <h4>Search</h4>
+                    <input type="text" class="form-control" placeholder="Search courses...">
+                </div>
+
+                <div class="filter-group">
+                    <h4>Categories</h4>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="cat-dev" checked>
+                        <label for="cat-dev">Development (120)</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="cat-design">
+                        <label for="cat-design">Design (85)</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="cat-business">
+                        <label for="cat-business">Business (64)</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="cat-marketing">
+                        <label for="cat-marketing">Marketing (42)</label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Rating</h4>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="rate-45">
+                        <label for="rate-45">4.5 & up</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="rate-40">
+                        <label for="rate-40">4.0 & up</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="rate-35">
+                        <label for="rate-35">3.5 & up</label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Level</h4>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="lvl-beg">
+                        <label for="lvl-beg">Beginner</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="lvl-int">
+                        <label for="lvl-int">Intermediate</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="lvl-adv">
+                        <label for="lvl-adv">Advanced</label>
+                    </div>
+                </div>
+            </aside>
+
+            <div class="courses-content">
+                <div class="flex justify-between items-center mb-4">
+                    <h2>All Courses</h2>
+                    <select class="form-control" style="width: auto;">
+                        <option>Most Popular</option>
+                        <option>Newest</option>
+                        <option>Highest Rated</option>
+                    </select>
+                </div>
+
+                <div class="course-grid"
+                    style="padding-top: 0; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                    <!-- Course 1 -->
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="Web Development">
+                        </div>
+                        <div class="course-content">
+                            <div class="course-category">Development</div>
+                            <h3 class="course-title"><a href="course-detail.html">Full Stack Web Development
+                                    Bootcamp</a></h3>
+                            <p>Master HTML, CSS, JS, Node, and React in this comprehensive bootcamp.</p>
+                            <div class="course-meta">
+                                <span><i class="fas fa-user"></i> John Doe</span>
+                                <span><i class="fas fa-star" style="color: var(--accent-color)"></i> 4.9</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Course 2 -->
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="Data Science">
+                        </div>
+                        <div class="course-content">
+                            <div class="course-category">Data Science</div>
+                            <h3 class="course-title"><a href="course-detail.html">Data Science & Machine Learning
+                                    A-Z</a></h3>
+                            <p>Learn Python, Pandas, Scikit-Learn and more for data analysis.</p>
+                            <div class="course-meta">
+                                <span><i class="fas fa-user"></i> Sarah Smith</span>
+                                <span><i class="fas fa-star" style="color: var(--accent-color)"></i> 4.8</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Course 3 -->
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="Design">
+                        </div>
+                        <div class="course-content">
+                            <div class="course-category">Design</div>
+                            <h3 class="course-title"><a href="course-detail.html">UI/UX Design Masterclass</a></h3>
+                            <p>Design beautiful user interfaces and user experiences from scratch.</p>
+                            <div class="course-meta">
+                                <span><i class="fas fa-user"></i> Mike Johnson</span>
+                                <span><i class="fas fa-star" style="color: var(--accent-color)"></i> 4.9</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Course 4 -->
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="Marketing">
+                        </div>
+                        <div class="course-content">
+                            <div class="course-category">Marketing</div>
+                            <h3 class="course-title"><a href="course-detail.html">Digital Marketing Strategy</a></h3>
+                            <p>Learn to create effective marketing strategies for any business.</p>
+                            <div class="course-meta">
+                                <span><i class="fas fa-user"></i> Emily Davis</span>
+                                <span><i class="fas fa-star" style="color: var(--accent-color)"></i> 4.7</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Course 5 -->
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="Business">
+                        </div>
+                        <div class="course-content">
+                            <div class="course-category">Business</div>
+                            <h3 class="course-title"><a href="course-detail.html">Business Management Essentials</a>
+                            </h3>
+                            <p>Key concepts and skills for effective business management.</p>
+                            <div class="course-meta">
+                                <span><i class="fas fa-user"></i> Robert Brown</span>
+                                <span><i class="fas fa-star" style="color: var(--accent-color)"></i> 4.6</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Course 6 -->
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="Photography">
+                        </div>
+                        <div class="course-content">
+                            <div class="course-category">Photography</div>
+                            <h3 class="course-title"><a href="course-detail.html">Photography for Beginners</a></h3>
+                            <p>Take stunning photos with any camera, even your smartphone.</p>
+                            <div class="course-meta">
+                                <span><i class="fas fa-user"></i> Jessica Wilson</span>
+                                <span><i class="fas fa-star" style="color: var(--accent-color)"></i> 4.8</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button class="btn btn-outline">Load More Courses</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2023 LearnSpace. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

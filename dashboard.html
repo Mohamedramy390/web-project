@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - LearnSpace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--success-color);
+            border-radius: 4px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .bg-blue-100 {
+            background-color: #dbeafe;
+            color: #2563eb;
+        }
+
+        .bg-green-100 {
+            background-color: #dcfce7;
+            color: #16a34a;
+        }
+
+        .bg-purple-100 {
+            background-color: #f3e8ff;
+            color: #9333ea;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-graduation-cap"></i> LearnSpace
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                    <li>
+                        <a href="#" class="flex items-center gap-2">
+                            <img src="https://ui-avatars.com/api/?name=John+Doe&background=random" alt="Profile"
+                                style="width: 32px; height: 32px; border-radius: 50%;">
+                            <span>John Doe</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="dashboard-layout">
+            <aside class="sidebar">
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="active"><i class="fas fa-home" style="width: 24px;"></i> Overview</a></li>
+                    <li><a href="#"><i class="fas fa-book" style="width: 24px;"></i> My Courses</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line" style="width: 24px;"></i> Progress</a></li>
+                    <li><a href="#"><i class="fas fa-envelope" style="width: 24px;"></i> Messages</a></li>
+                    <li><a href="#"><i class="fas fa-cog" style="width: 24px;"></i> Settings</a></li>
+                    <li><a href="index.html" style="color: #ef4444;"><i class="fas fa-sign-out-alt"
+                                style="width: 24px;"></i> Logout</a></li>
+                </ul>
+            </aside>
+
+            <div class="dashboard-content">
+                <div class="mb-4">
+                    <h2>Welcome back, John! 👋</h2>
+                    <p>Here's what's happening with your courses today.</p>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-blue-100"><i class="fas fa-book-open"></i></div>
+                        <div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 0;">4</h3>
+                            <p style="margin-bottom: 0; font-size: 0.875rem;">Courses in Progress</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-green-100"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 0;">12</h3>
+                            <p style="margin-bottom: 0; font-size: 0.875rem;">Completed Lessons</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-purple-100"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 0;">18h</h3>
+                            <p style="margin-bottom: 0; font-size: 0.875rem;">Hours Learned</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="mb-4">Continue Learning</h3>
+                <div class="course-grid"
+                    style="padding-top: 0; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                    <!-- Enrolled Course 1 -->
+                    <div class="course-card">
+                        <div class="course-image" style="height: 160px;">
+                            <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="Web Development">
+                        </div>
+                        <div class="course-content">
+                            <h4 style="margin-bottom: 0.5rem;">Full Stack Web Development</h4>
+                            <p style="font-size: 0.875rem; margin-bottom: 0.5rem;">Next Lesson: Introduction to React
+                                Hooks</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 65%;"></div>
+                            </div>
+                            <div class="flex justify-between mt-4"
+                                style="font-size: 0.875rem; color: var(--text-secondary);">
+                                <span>65% Complete</span>
+                                <a href="course-detail.html"
+                                    style="color: var(--primary-color); font-weight: 600;">Resume</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Enrolled Course 2 -->
+                    <div class="course-card">
+                        <div class="course-image" style="height: 160px;">
+                            <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="Data Science">
+                        </div>
+                        <div class="course-content">
+                            <h4 style="margin-bottom: 0.5rem;">Data Science Fundamentals</h4>
+                            <p style="font-size: 0.875rem; margin-bottom: 0.5rem;">Next Lesson: Pandas DataFrames</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 30%;"></div>
+                            </div>
+                            <div class="flex justify-between mt-4"
+                                style="font-size: 0.875rem; color: var(--text-secondary);">
+                                <span>30% Complete</span>
+                                <a href="course-detail.html"
+                                    style="color: var(--primary-color); font-weight: 600;">Resume</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Stack Web Development Bootcamp - LearnSpace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .course-header {
+            background-color: #1e293b;
+            color: white;
+            padding: 4rem 0;
+        }
+
+        .course-header h1 {
+            color: white;
+        }
+
+        .course-header p {
+            color: #cbd5e1;
+        }
+
+        .lesson-list {
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .lesson-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .lesson-item:last-child {
+            border-bottom: none;
+        }
+
+        .lesson-item:hover {
+            background-color: #f8fafc;
+        }
+
+        .lesson-title {
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .enroll-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-lg);
+            position: sticky;
+            top: 100px;
+            border: 1px solid var(--border-color);
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .instructor-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .instructor-img {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-graduation-cap"></i> LearnSpace
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="courses.html" class="active">Courses</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="login.html" class="btn btn-primary">Login / Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="course-header">
+        <div class="container">
+            <div style="max-width: 800px;">
+                <div class="course-category" style="color: var(--secondary-color);">Development</div>
+                <h1 class="mb-4">Full Stack Web Development Bootcamp</h1>
+                <p class="mb-4" style="font-size: 1.25rem;">Become a full-stack web developer with just one course.
+                    HTML, CSS, Javascript, Node, React, MongoDB and more!</p>
+                <div class="flex items-center gap-2" style="color: #cbd5e1;">
+                    <span><i class="fas fa-star" style="color: var(--accent-color)"></i> 4.9 (1,240 ratings)</span>
+                    <span>•</span>
+                    <span>15,000 students</span>
+                    <span>•</span>
+                    <span>Last updated Nov 2023</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="container" style="padding: 4rem 2rem;">
+        <div class="dashboard-layout" style="grid-template-columns: 1fr 350px;">
+            <div class="course-details">
+                <section class="mb-4">
+                    <h2>What you'll learn</h2>
+                    <div class="features-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
+                        <div class="flex gap-2"><i class="fas fa-check" style="color: var(--success-color);"></i>
+                            <span>Build full-stack web apps</span></div>
+                        <div class="flex gap-2"><i class="fas fa-check" style="color: var(--success-color);"></i>
+                            <span>Master React and Node.js</span></div>
+                        <div class="flex gap-2"><i class="fas fa-check" style="color: var(--success-color);"></i>
+                            <span>Create responsive layouts</span></div>
+                        <div class="flex gap-2"><i class="fas fa-check" style="color: var(--success-color);"></i>
+                            <span>Deploy to production</span></div>
+                    </div>
+                </section>
+
+                <section class="mb-4" style="margin-top: 3rem;">
+                    <h2>Course Content</h2>
+                    <p>12 sections • 115 lectures • 14h 32m total length</p>
+                    <div class="lesson-list">
+                        <div class="lesson-item">
+                            <div class="lesson-title"><i class="fas fa-play-circle"></i> Introduction to Web Development
+                            </div>
+                            <span style="color: var(--text-secondary);">15:00</span>
+                        </div>
+                        <div class="lesson-item">
+                            <div class="lesson-title"><i class="fas fa-play-circle"></i> HTML5 Basics</div>
+                            <span style="color: var(--text-secondary);">45:30</span>
+                        </div>
+                        <div class="lesson-item">
+                            <div class="lesson-title"><i class="fas fa-play-circle"></i> CSS3 Styling</div>
+                            <span style="color: var(--text-secondary);">1:10:00</span>
+                        </div>
+                        <div class="lesson-item">
+                            <div class="lesson-title"><i class="fas fa-lock"></i> JavaScript Fundamentals</div>
+                            <span style="color: var(--text-secondary);">2:30:00</span>
+                        </div>
+                        <div class="lesson-item">
+                            <div class="lesson-title"><i class="fas fa-lock"></i> Advanced JavaScript</div>
+                            <span style="color: var(--text-secondary);">3:15:00</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mb-4" style="margin-top: 3rem;">
+                    <h2>Instructor</h2>
+                    <div class="instructor-profile">
+                        <img src="https://ui-avatars.com/api/?name=John+Doe&background=random" alt="John Doe"
+                            class="instructor-img">
+                        <div>
+                            <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem;">John Doe</h3>
+                            <p style="margin-bottom: 0; font-size: 0.9rem;">Senior Web Developer & Instructor</p>
+                            <div class="flex gap-2 mt-4" style="font-size: 0.9rem; color: var(--text-secondary);">
+                                <span><i class="fas fa-star"></i> 4.9 Rating</span>
+                                <span><i class="fas fa-play-circle"></i> 10 Courses</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p>John is a senior web developer with over 10 years of experience. He loves teaching and has helped
+                        thousands of students launch their careers in tech.</p>
+                </section>
+            </div>
+
+            <aside>
+                <div class="enroll-card">
+                    <div class="price">$89.99</div>
+                    <button class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">Add to Cart</button>
+                    <button class="btn btn-outline" style="width: 100%;">Buy Now</button>
+                    <p class="text-center mt-4" style="font-size: 0.875rem;">30-Day Money-Back Guarantee</p>
+
+                    <div style="margin-top: 1.5rem;">
+                        <h4 style="font-size: 1rem; margin-bottom: 1rem;">This course includes:</h4>
+                        <ul style="font-size: 0.9rem; color: var(--text-secondary);">
+                            <li class="mb-4"><i class="fas fa-video" style="width: 20px;"></i> 14.5 hours on-demand
+                                video</li>
+                            <li class="mb-4"><i class="fas fa-file" style="width: 20px;"></i> 5 articles</li>
+                            <li class="mb-4"><i class="fas fa-download" style="width: 20px;"></i> 10 downloadable
+                                resources</li>
+                            <li class="mb-4"><i class="fas fa-mobile" style="width: 20px;"></i> Access on mobile and TV
+                            </li>
+                            <li><i class="fas fa-certificate" style="width: 20px;"></i> Certificate of completion</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2023 LearnSpace. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
