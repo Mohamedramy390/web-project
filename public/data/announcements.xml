@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<announcements>
+    <announcement>
+        <title>Midterm Exam Schedule</title>
+        <date>2023-10-15</date>
+        <content>The midterm exams will maintain from Oct 25th to Nov 1st. Please check your schedule.</content>
+    </announcement>
+    <announcement>
+        <title>New Course Available</title>
+        <date>2023-10-10</date>
+        <content>Introduction to Cloud Computing is now open for registration.</content>
+    </announcement>
+    <announcement>
+        <title>System Maintenance</title>
+        <date>2023-10-05</date>
+        <content>The system will be down for maintenance on Sunday at 2:00 AM.</content>
+    </announcement>
+</announcements>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructor Dashboard - LearnSpace</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .bg-blue-100 {
+            background-color: #dbeafe;
+            color: #2563eb;
+        }
+
+        .bg-green-100 {
+            background-color: #dcfce7;
+            color: #16a34a;
+        }
+
+        .bg-purple-100 {
+            background-color: #f3e8ff;
+            color: #9333ea;
+        }
+
+        .bg-orange-100 {
+            background-color: #ffedd5;
+            color: #ea580c;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background-color: #dcfce7;
+            color: #16a34a;
+        }
+
+        .status-draft {
+            background-color: #f1f5f9;
+            color: #64748b;
+        }
+
+        /* View Switching Styles */
+        .dashboard-section {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .dashboard-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .sidebar-menu a {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-graduation-cap"></i> LearnSpace
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="instructor-dashboard.html" class="active">Instructor</a></li>
+                    <li>
+                        <a href="#" class="flex items-center gap-2">
+                            <img class="user-avatar-display"
+                                src="https://ui-avatars.com/api/?name=User&background=random" alt="Profile"
+                                style="width: 32px; height: 32px; border-radius: 50%;">
+                            <span class="user-name-display">User</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="dashboard-layout">
+            <aside class="sidebar">
+                <ul class="sidebar-menu">
+                    <li><a class="nav-item active" data-target="overview"><i class="fas fa-chart-pie"
+                                style="width: 24px;"></i> Overview</a></li>
+                    <li><a class="nav-item" data-target="courses"><i class="fas fa-chalkboard-teacher"
+                                style="width: 24px;"></i> My Courses</a></li>
+                    <li><a class="nav-item" data-target="students"><i class="fas fa-users" style="width: 24px;"></i>
+                            Students</a></li>
+                    <li><a class="nav-item" data-target="messages"><i class="fas fa-comments" style="width: 24px;"></i>
+                            Messages</a></li>
+                    <li><a class="nav-item" data-target="earnings"><i class="fas fa-wallet" style="width: 24px;"></i>
+                            Earnings</a></li>
+                    <li><a class="nav-item" data-target="settings"><i class="fas fa-cog" style="width: 24px;"></i>
+                            Settings</a></li>
+                    <li><a href="#" class="logout-btn" style="color: #ef4444;"><i class="fas fa-sign-out-alt"
+                                style="width: 24px;"></i> Logout</a></li>
+                </ul>
+            </aside>
+
+            <div class="dashboard-content">
+                <!-- Overview Section -->
+                <div id="overview" class="dashboard-section active">
+                    <div class="mb-4 flex justify-between items-center">
+                        <div>
+                            <h2>Instructor Dashboard</h2>
+                            <p>Manage your courses and track your performance.</p>
+                        </div>
+                        <button class="btn btn-primary create-course-btn"><i class="fas fa-plus"></i>
+                            Create New Course</button>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-blue-100"><i class="fas fa-users"></i></div>
+                            <div>
+                                <h3 id="stat-total-students" style="font-size: 1.5rem; margin-bottom: 0;">-</h3>
+                                <p style="margin-bottom: 0; font-size: 0.875rem;">Total Students</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon bg-green-100"><i class="fas fa-dollar-sign"></i></div>
+                            <div>
+                                <h3 id="stat-total-earnings" style="font-size: 1.5rem; margin-bottom: 0;">-</h3>
+                                <p style="margin-bottom: 0; font-size: 0.875rem;">Total Earnings</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon bg-purple-100"><i class="fas fa-book"></i></div>
+                            <div>
+                                <h3 id="stat-active-courses" style="font-size: 1.5rem; margin-bottom: 0;">-</h3>
+                                <p style="margin-bottom: 0; font-size: 0.875rem;">Active Courses</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon bg-orange-100"><i class="fas fa-star"></i></div>
+                            <div>
+                                <h3 id="stat-rating" style="font-size: 1.5rem; margin-bottom: 0;">-</h3>
+                                <p style="margin-bottom: 0; font-size: 0.875rem;">Instructor Rating</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="mb-4">Recent Courses</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Course Name</th>
+                                    <th>Enrolled</th>
+                                    <th>Rating</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-courses-body">
+                                <tr>
+                                    <td colspan="5">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- My Courses Section -->
+                <div id="courses" class="dashboard-section">
+                    <div class="mb-4 flex justify-between items-center">
+                        <h2>My Courses</h2>
+                        <button class="btn btn-primary create-course-btn"><i class="fas fa-plus"></i> Create New
+                            Course</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Course Name</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Enrolled</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="courses-table-body">
+                                <tr>
+                                    <td colspan="6">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Students Section -->
+                <div id="students" class="dashboard-section">
+                    <h2 class="mb-4">Enrolled Students</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Course Enrolled</th>
+                                    <th>Progress</th>
+                                    <th>Joined Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="students-table-body">
+                                <tr>
+                                    <td colspan="5">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Messages Section -->
+                <div id="messages" class="dashboard-section">
+                    <h2 class="mb-4">Messages</h2>
+                    <div class="table-container" id="messages-container">
+                        <div style="padding: 2rem; text-align: center; color: var(--text-secondary);">
+                            <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 1rem; color: #cbd5e1;"></i>
+                            <p>Loading messages...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Earnings Section -->
+                <div id="earnings" class="dashboard-section">
+                    <h2 class="mb-4">Earnings Report</h2>
+                    <div class="dashboard-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-green-100"><i class="fas fa-wallet"></i></div>
+                            <div>
+                                <h3 id="earn-this-month" style="font-size: 1.5rem; margin-bottom: 0;">$0.00</h3>
+                                <p style="margin-bottom: 0; font-size: 0.875rem;">This Month</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon bg-blue-100"><i class="fas fa-university"></i></div>
+                            <div>
+                                <h3 id="earn-lifetime" style="font-size: 1.5rem; margin-bottom: 0;">$0.00</h3>
+                                <p style="margin-bottom: 0; font-size: 0.875rem;">Total Lifetime</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <h4 style="padding: 1rem; border-bottom: 1px solid var(--border-color);">Recent Transactions
+                        </h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Course</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="4" class="text-center">No recent transactions.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Settings Section -->
+                <div id="settings" class="dashboard-section">
+                    <h2 class="mb-4">Instructor Settings</h2>
+                    <div class="auth-container"
+                        style="margin: 0; max-width: 100%; box-shadow: none; border: 1px solid var(--border-color);">
+                        <form id="settings-form">
+                            <div class="form-group">
+                                <label>Display Name</label>
+                                <input type="text" id="settings-name" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                                <label>Bio</label>
+                                <textarea id="settings-bio" class="form-control" rows="4"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Email Notifications</label>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" checked> New Student Enrollment
+                                </div>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" checked> New Messages
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Course Modal -->
+    <div id="course-modal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center;">
+        <div
+            style="background: white; padding: 2rem; border-radius: 1rem; width: 500px; max-width: 90%; max-height: 90vh; overflow-y: auto;">
+            <h2 id="modal-title" class="mb-4">Create New Course</h2>
+            <form id="course-form">
+                <input type="hidden" id="course-id">
+                <div class="form-group">
+                    <label>Course Name</label>
+                    <input type="text" id="course-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="course-category" class="form-control">
+                        <option>Development</option>
+                        <option>Business</option>
+                        <option>Design</option>
+                        <option>Marketing</option>
+                        <option>Data Science</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Price ($)</label>
+                    <input type="number" id="course-price" class="form-control" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>Image URL</label>
+                    <input type="url" id="course-image" class="form-control"
+                        placeholder="https://example.com/image.jpg">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="course-description" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Course Videos (YouTube Links)</label>
+                    <small style="display: block; color: #64748b; margin-bottom: 0.5rem;">Add YouTube video URLs for
+                        your course lessons. One per line.</small>
+                    <textarea id="course-videos" class="form-control" rows="5"
+                        placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ&#10;https://www.youtube.com/watch?v=example2&#10;https://www.youtube.com/watch?v=example3"></textarea>
+                    <small style="display: block; color: #64748b; margin-top: 0.25rem;">Tip: Each line will become a
+                        separate lesson in your course.</small>
+                </div>
+                <div class="flex justify-between">
+                    <button type="button" class="btn btn-outline"
+                        onclick="$('#course-modal').fadeOut();">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Course</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Message Modal -->
+    <div id="message-modal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center;">
+        <div style="background: white; padding: 2rem; border-radius: 1rem; width: 500px; max-width: 90%;">
+            <h2 class="mb-4">Send Message</h2>
+            <form id="message-form">
+                <div class="form-group">
+                    <label>To:</label>
+                    <input type="text" id="msg-recipient" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Subject</label>
+                    <input type="text" id="msg-subject" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea id="msg-body" class="form-control" rows="4" required></textarea>
+                </div>
+                <div class="flex justify-between">
+                    <button type="button" class="btn btn-outline"
+                        onclick="$('#message-modal').fadeOut();">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/instructor-dashboard.js"></script>
+    <script>
+        // Dashboard Navigation Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('.nav-item');
+            const sections = document.querySelectorAll('.dashboard-section');
+
+            function switchTab(targetId) {
+                // Update Sidebar
+                navItems.forEach(item => {
+                    if (item.dataset.target === targetId) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+
+                // Update Content
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === targetId) {
+                        section.classList.add('active');
+                    }
+                });
+            }
+
+            // Expose to global scope for buttons
+            window.switchTab = switchTab;
+
+            navItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = item.dataset.target;
+                    switchTab(target);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
+</body>
+
+</html>

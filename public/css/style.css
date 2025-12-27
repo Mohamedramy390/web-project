@@ -78,11 +78,15 @@ p {
 
 /* Header & Navigation */
 header {
-    background-color: var(--surface-color);
-    box-shadow: var(--shadow-sm);
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(229, 231, 235, 0.5);
     position: sticky;
     top: 0;
     z-index: 1000;
+    transition: all 0.3s ease;
 }
 
 nav {
@@ -95,25 +99,37 @@ nav {
 .logo {
     font-size: 1.5rem;
     font-weight: 800;
-    color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
+/* Fix for icon not showing gradient text fill properly */
+.logo i {
+    -webkit-text-fill-color: var(--primary-color);
+}
+
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
+    align-items: center;
 }
 
 .nav-links a {
     font-weight: 500;
     color: var(--text-secondary);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
     color: var(--primary-color);
+    background-color: rgba(79, 70, 229, 0.08);
 }
 
 .btn {

@@ -1,0 +1,115 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin User",
+      "email": "admin@learnspace.com",
+      "password": "password123",
+      "role": "admin",
+      "joinedDate": "2025-01-01"
+    },
+    {
+      "id": 2,
+      "name": "Sarah Smith",
+      "email": "instructor@learnspace.com",
+      "password": "password123",
+      "role": "instructor",
+      "bio": "Experienced Web Developer",
+      "joinedDate": "2025-01-05"
+    },
+    {
+      "id": 3,
+      "name": "John Doe",
+      "email": "student@learnspace.com",
+      "password": "password123",
+      "role": "student",
+      "joinedDate": "2025-01-10",
+      "balance": 780.02
+    },
+    {
+      "id": 1766843879972,
+      "name": "mohamed ramy",
+      "email": "mohamed@gmail.com",
+      "password": "password123",
+      "role": "student",
+      "balance": 0,
+      "joinedDate": "2025-12-27"
+    }
+  ],
+  "courses": [
+    {
+      "id": 103,
+      "code": "DES301",
+      "name": "UI/UX Design Masterclass",
+      "instructor": "Mike Johnson",
+      "category": "Design",
+      "price": 49.99,
+      "rating": 4.7,
+      "students": 150,
+      "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "description": "Design beautiful user interfaces."
+    },
+    {
+      "id": 1766842033739,
+      "name": "Data Structure",
+      "category": "Development",
+      "price": 100,
+      "image": "https://3ca51ebc.delivery.rocketcdn.me/wp-content/uploads/2020/09/Data-structures-and-algorithms-new.webp",
+      "description": "",
+      "instructor": "Sarah Smith",
+      "videos": [
+        "https://www.youtube.com/watch?v=lWnV15A9tLs&list=PL89NemWwKgBTG1yDf3m94gsvc8DNENNrb",
+        "https://www.youtube.com/watch?v=iEnQhpDs7us&list=PL89NemWwKgBTG1yDf3m94gsvc8DNENNrb&index=2",
+        "https://www.youtube.com/watch?v=J3O__d1iutk&list=PL89NemWwKgBTG1yDf3m94gsvc8DNENNrb&index=3",
+        "https://www.youtube.com/watch?v=6i99NHDuKzk&list=PL89NemWwKgBTG1yDf3m94gsvc8DNENNrb&index=4"
+      ],
+      "status": "Active",
+      "students": 1,
+      "rating": 5
+    }
+  ],
+  "enrollments": [
+    {
+      "userId": 3,
+      "courseId": "101",
+      "progress": 20,
+      "enrollmentDate": "2025-12-27T11:46:18.174Z"
+    },
+    {
+      "userId": 3,
+      "courseId": "102",
+      "progress": 0,
+      "enrollmentDate": "2025-12-27T12:11:01.833Z"
+    },
+    {
+      "userId": 3,
+      "courseId": "1766838594425",
+      "progress": 0,
+      "enrollmentDate": "2025-12-27T12:31:27.679Z"
+    },
+    {
+      "userId": 3,
+      "courseId": "1766842033739",
+      "progress": 0,
+      "enrollmentDate": "2025-12-27T13:28:38.376Z"
+    }
+  ],
+  "messages": [
+    {
+      "id": 1766839070655,
+      "from": "Sarah Smith",
+      "to": "John Doe",
+      "subject": "course update",
+      "body": "hello",
+      "date": "2025-12-27T12:37:50.655Z",
+      "read": false
+    }
+  ],
+  "ratings": [
+    {
+      "userId": 3,
+      "courseId": "1766842033739",
+      "rating": 5
+    }
+  ]
+}

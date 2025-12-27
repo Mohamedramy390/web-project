@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - LearnSpace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/float-layout.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--success-color);
+            border-radius: 4px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .bg-blue-100 {
+            background-color: #dbeafe;
+            color: #2563eb;
+        }
+
+        .bg-green-100 {
+            background-color: #dcfce7;
+            color: #16a34a;
+        }
+
+        .bg-purple-100 {
+            background-color: #f3e8ff;
+            color: #9333ea;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* View Switching Styles */
+        .dashboard-section {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .dashboard-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .sidebar-menu a {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-graduation-cap"></i> LearnSpace
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                    <li>
+                        <a href="#" class="flex items-center gap-2">
+                            <img id="user-avatar" src="https://ui-avatars.com/api/?name=User&amp;background=random"
+                                alt="Profile" style="width: 32px; height: 32px; border-radius: 50%;" />
+                            <span id="user-name">User</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Main Layout using Grid (Modern) -->
+        <div class="dashboard-layout">
+            <aside class="sidebar">
+                <ul class="sidebar-menu">
+                    <li><a class="nav-item active" data-target="overview"><i class="fas fa-home"
+                                style="width: 24px;"></i> Overview</a></li>
+                    <li><a class="nav-item" data-target="courses"><i class="fas fa-book" style="width: 24px;"></i> My
+                            Courses</a></li>
+                    <li><a class="nav-item" data-target="progress"><i class="fas fa-chart-line"
+                                style="width: 24px;"></i> Progress</a></li>
+                    <li><a class="nav-item" data-target="messages"><i class="fas fa-envelope" style="width: 24px;"></i>
+                            Messages</a></li>
+                    <li><a class="nav-item" data-target="wallet"><i class="fas fa-wallet" style="width: 24px;"></i>
+                            Wallet</a></li>
+                    <li><a class="nav-item" data-target="settings"><i class="fas fa-cog" style="width: 24px;"></i>
+                            Settings</a></li>
+                    <li><a href="#" id="logout-btn" style="color: #ef4444;"><i class="fas fa-sign-out-alt"
+                                style="width: 24px;"></i> Logout</a></li>
+                </ul>
+            </aside>
+
+            <div class="dashboard-content">
+                <!-- Wallet Section -->
+                <div id="wallet" class="dashboard-section">
+                    <h2 class="mb-4">My Wallet</h2>
+                    <div class="stat-card" style="display:block;">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="stat-icon bg-green-100"><i class="fas fa-wallet"></i></div>
+                            <div>
+                                <h3 id="current-balance" style="font-size: 2rem; margin-bottom: 0;">$0.00</h3>
+                                <p style="margin-bottom: 0;">Current Balance</p>
+                            </div>
+                        </div>
+                        <div style="border-top: 1px solid #eee; padding-top: 1rem;">
+                            <h4 class="mb-2">Add Funds</h4>
+                            <form id="add-funds-form" class="flex gap-2">
+                                <input type="number" id="fund-amount" class="form-control"
+                                    placeholder="Amount (e.g. 50)" style="max-width: 200px;" required min="1">
+                                <button type="submit" class="btn btn-primary">Top Up</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Overview Section -->
+                <div id="overview" class="dashboard-section active">
+                    <div class="mb-4">
+                        <h2>Welcome back! 👋</h2>
+                        <p>Here's what's happening with your courses today.</p>
+
+                        <!-- Stats Grid -->
+                        <div class="dashboard-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon bg-blue-100"><i class="fas fa-book-open"></i></div>
+                                <div>
+                                    <h3 id="stat-progress-count" style="font-size: 1.5rem; margin-bottom: 0;">-</h3>
+                                    <p style="margin-bottom: 0; font-size: 0.875rem;">Courses in Progress</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon bg-green-100"><i class="fas fa-check-circle"></i></div>
+                                <div>
+                                    <h3 id="stat-completed-lessons" style="font-size: 1.5rem; margin-bottom: 0;">12</h3>
+                                    <p style="margin-bottom: 0; font-size: 0.875rem;">Completed Lessons</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon bg-purple-100"><i class="fas fa-clock"></i></div>
+                                <div>
+                                    <h3 style="font-size: 1.5rem; margin-bottom: 0;">18h</h3>
+                                    <p style="margin-bottom: 0; font-size: 0.875rem;">Hours Learned</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Float Layout Section for Course List and Announcements -->
+                        <div class="float-wrapper clearfix">
+                            <div class="float-content">
+                                <h3 class="mb-4">Continue Learning</h3>
+                                <div id="course-list-overview" class="course-grid"
+                                    style="padding-top: 0; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                                    <p>Loading courses...</p>
+                                </div>
+                            </div>
+
+                            <div class="float-sidebar">
+                                <h4 style="margin-bottom: 1rem;"><i class="fas fa-bullhorn"></i> Announcements</h4>
+                                <div id="announcements-list">
+                                    <p>Loading announcements...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Courses Section -->
+                <div id="courses" class="dashboard-section">
+                    <h2 class="mb-4">My Courses</h2>
+                    <div id="course-list-all" class="course-grid"
+                        style="padding-top: 0; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                        <p>Loading...</p>
+                    </div>
+                </div>
+
+                <!-- Progress Section -->
+                <div id="progress" class="dashboard-section">
+                    <h2 class="mb-4">Learning Progress</h2>
+                    <div class="stat-card" style="flex-direction: column; align-items: flex-start;">
+                        <h4>Weekly Activity</h4>
+                        <div
+                            style="width: 100%; height: 200px; background: #f1f5f9; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
+                            <p>Activity Chart (Coming Soon)</p>
+                        </div>
+                    </div>
+
+                    <h4 class="mt-4 mb-3">Course Progress</h4>
+                    <div id="progress-course-list">
+                        <p>Loading progress...</p>
+                    </div>
+                </div>
+
+                <!-- Messages Section -->
+                <div id="messages" class="dashboard-section">
+                    <h2 class="mb-4">Messages</h2>
+                    <div id="messages-list" class="flex flex-col gap-4">
+                        <div class="stat-card">
+                            <p>No new messages from instructors.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Section -->
+                <div id="settings" class="dashboard-section">
+                    <h2 class="mb-4">Account Settings</h2>
+                    <div class="auth-container"
+                        style="margin: 0; max-width: 100%; box-shadow: none; border: 1px solid var(--border-color);">
+                        <form id="settings-form">
+                            <div class="form-group">
+                                <label>Display Name</label>
+                                <input type="text" id="settings-name" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="settings-email" class="form-control" value="" readonly
+                                    style="background-color: #f1f5f9;">
+                            </div>
+                            <div class="form-group">
+                                <label>New Password (leave blank to keep current)</label>
+                                <input type="password" id="settings-password" class="form-control"
+                                    placeholder="New Password">
+                            </div>
+                            <div class="form-group">
+                                <label>Email Preferences</label>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" checked> Course Updates
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2023 LearnSpace. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/main.js"></script> <!-- General behavior -->
+    <script src="js/dashboard.js"></script> <!-- Specific Dashboard Logic with AJAX -->
+</body>
+
+</html>

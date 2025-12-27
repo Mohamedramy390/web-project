@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Detail - LearnSpace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .course-header {
+            background-color: #1e293b;
+            color: white;
+            padding: 4rem 0;
+        }
+
+        .course-header h1 {
+            color: white;
+        }
+
+        .course-header p {
+            color: #cbd5e1;
+        }
+
+        .lesson-list {
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .lesson-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .lesson-item:last-child {
+            border-bottom: none;
+        }
+
+        .lesson-item:hover {
+            background-color: #f8fafc;
+        }
+
+        .lesson-title {
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .enroll-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-lg);
+            position: sticky;
+            top: 100px;
+            border: 1px solid var(--border-color);
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .instructor-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .instructor-img {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo"><i class="fas fa-graduation-cap"></i> LearnSpace</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="courses.html" class="active">Courses</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="login.html" class="btn btn-primary">Login / Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="course-header">
+        <div class="container">
+            <div style="max-width: 800px;">
+                <div class="course-category" style="color: var(--secondary-color);" id="c-category">Category</div>
+                <h1 class="mb-4" id="c-name">Loading Course...</h1>
+                <p class="mb-4" style="font-size: 1.25rem;" id="c-desc">Please wait while we fetch the course details.
+                </p>
+                <div class="flex items-center gap-2" style="color: #cbd5e1;">
+                    <span><i class="fas fa-star" style="color: var(--accent-color)"></i> <span
+                            id="c-rating">0.0</span></span>
+                    <span>•</span>
+                    <span><span id="c-students">0</span> students</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="container" style="padding: 4rem 2rem;">
+        <div class="dashboard-layout" style="grid-template-columns: 1fr 350px;">
+            <div class="course-details">
+                <section class="mb-4">
+                    <h2>What you'll learn</h2>
+                    <div class="features-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
+                        <!-- Static for now as dynamic features require more DB structure -->
+                        <div class="flex gap-2"><i class="fas fa-check"
+                                style="color: var(--success-color);"></i><span>Build full-stack web apps</span></div>
+                        <div class="flex gap-2"><i class="fas fa-check"
+                                style="color: var(--success-color);"></i><span>Master key concepts</span></div>
+                    </div>
+                </section>
+
+                <section class="mb-4" style="margin-top: 3rem;">
+                    <h2>Course Content</h2>
+                    <p>Sample Content Structure</p>
+                    <div class="lesson-list">
+                        <div class="lesson-item">
+                            <div class="lesson-title"><i class="fas fa-play-circle"></i> Introduction</div>
+                            <span>10:00</span>
+                        </div>
+                        <div class="lesson-item">
+                            <div class="lesson-title"><i class="fas fa-lock"></i> Chapter 1</div><span>45:00</span>
+                        </div>
+                        <div class="lesson-item">
+                            <div class="lesson-title"><i class="fas fa-lock"></i> Chapter 2</div><span>1:15:00</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mb-4" style="margin-top: 3rem;">
+                    <h2>Instructor</h2>
+                    <div class="instructor-profile">
+                        <img src="https://ui-avatars.com/api/?name=Instructor&background=random" id="c-instr-img"
+                            alt="Instructor" class="instructor-img">
+                        <div>
+                            <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem;" id="c-instructor">-</h3>
+                            <p style="margin-bottom: 0; font-size: 0.9rem;">Course Instructor</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <aside>
+                <div class="enroll-card">
+                    <div class="price" id="c-price">Free</div>
+                    <button id="btn-enroll" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">Enroll
+                        Now</button>
+                    <p class="text-center mt-4" style="font-size: 0.875rem;">30-Day Money-Back Guarantee</p>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2023 LearnSpace. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        $(document).ready(function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseId = urlParams.get('id');
+
+            if (!courseId) {
+                alert('No course ID provided!');
+                window.location.href = 'courses.html';
+                return;
+            }
+
+            const userJson = localStorage.getItem('user');
+            const user = userJson ? JSON.parse(userJson) : null;
+
+            // Fetch Course Details and Check Enrollment
+            $.ajax({
+                url: `http://localhost:3000/api/courses/${courseId}`,
+                method: 'GET',
+                success: function (res) {
+                    if (res.success) {
+                        const c = res.course;
+                        $('#c-category').text(c.category);
+                        $('#c-name').text(c.name);
+                        $('#c-desc').text(c.description || 'No description available.');
+                        $('#c-rating').text(c.rating || 'New');
+                        $('#c-students').text(c.students || 0);
+                        $('#c-instructor').text(c.instructor);
+                        $('#c-price').text(c.price ? '$' + c.price : 'Free');
+                        $('#c-instr-img').attr('src', `https://ui-avatars.com/api/?name=${encodeURIComponent(c.instructor)}&background=random`);
+                        document.title = `${c.name} - LearnSpace`;
+
+                        // Check if already enrolled
+                        if (user) {
+                            $.get(`http://localhost:3000/api/my-courses?userId=${user.id}`, function (myCourses) {
+                                const isEnrolled = myCourses.find(mc => mc.id == courseId);
+                                if (isEnrolled) {
+                                    $('#btn-enroll').text('Go to Course').off('click').on('click', function () {
+                                        window.location.href = 'course-player.html?id=' + courseId;
+                                    });
+                                }
+                            });
+                        }
+                    }
+                },
+                error: function () {
+                    $('#c-name').text('Course Not Found');
+                    $('#btn-enroll').prop('disabled', true);
+                }
+            });
+
+            // Enroll Logic
+            $('#btn-enroll').on('click', function () {
+                if (!user) {
+                    alert('Please login to enroll.');
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                $.ajax({
+                    url: 'http://localhost:3000/api/enroll',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ userId: user.id, courseId: courseId }),
+                    success: function (res) {
+                        alert('Successfully enrolled! Remaining Balance: $' + (res.remainingBalance || 0));
+                        // Update user object in local storage if needed, or just redirect
+                        if (res.remainingBalance !== undefined) {
+                            user.balance = res.remainingBalance;
+                            localStorage.setItem('user', JSON.stringify(user));
+                        }
+                        window.location.href = 'dashboard.html';
+                    },
+                    error: function (xhr) {
+                        alert(xhr.responseJSON?.message || 'Enrollment failed');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

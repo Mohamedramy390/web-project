@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Player - LearnSpace</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .player-layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            height: calc(100vh - 70px);
+        }
+
+        .video-section {
+            background: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-direction: column;
+        }
+
+        .sidebar {
+            background: white;
+            border-left: 1px solid var(--border-color);
+            overflow-y: auto;
+        }
+
+        .lesson-item {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lesson-item:hover {
+            background: #f8fafc;
+        }
+
+        .lesson-item.active {
+            background: #e0f2fe;
+            color: var(--primary-color);
+            border-left: 4px solid var(--primary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <header style="box-shadow: none; border-bottom: 1px solid #eee;">
+        <div class="container" style="max-width: 100%; padding: 0 2rem;">
+            <nav>
+                <a href="dashboard.html" class="logo"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+                <h4 id="course-title" style="margin:0; margin-left: auto;">Loading...</h4>
+            </nav>
+        </div>
+    </header>
+
+    <div class="player-layout">
+        <div class="video-section" id="video-container">
+            <video id="video-player" controls style="width: 100%; max-width: 100%; height: auto; max-height: 100%;">
+                <source id="video-source" src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="sidebar">
+            <div style="padding: 1rem; border-bottom: 1px solid #eee;">
+                <h4 style="margin:0;">Course Content</h4>
+                <p style="margin:0; font-size: 0.8rem; color: #64748b;" id="progress-text">0% Completed</p>
+            </div>
+            <div id="lesson-list">
+                <!-- Lessons will be populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseId = urlParams.get('id');
+            const userJson = localStorage.getItem('user');
+
+            if (!userJson || !courseId) {
+                window.location.href = 'dashboard.html';
+                return;
+            }
+
+            const user = JSON.parse(userJson);
+
+            let lessons = [];
+            let currentLessonIndex = 0;
+            let courseData = null;
+
+            // Verify enrollment and load course data
+            $.get(`http://localhost:3000/api/my-courses?userId=${user.id}`, function (courses) {
+                const isEnrolled = courses.find(c => c.id == courseId);
+                if (!isEnrolled) {
+                    alert('You are not enrolled in this course.');
+                    window.location.href = 'course-detail.html?id=' + courseId;
+                } else {
+                    courseData = isEnrolled;
+                    $('#course-title').text(isEnrolled.name);
+
+                    // Load lessons from course videos or use defaults
+                    if (isEnrolled.videos && isEnrolled.videos.length > 0) {
+                        lessons = isEnrolled.videos.map((videoUrl, index) => ({
+                            id: index + 1,
+                            title: `Lesson ${index + 1}`,
+                            duration: 'Video',
+                            videoUrl: videoUrl,
+                            completed: false
+                        }));
+                    } else {
+                        // Fallback to sample videos if no videos are set
+                        lessons = [
+                            {
+                                id: 1,
+                                title: 'Introduction to the Course',
+                                duration: '5 min',
+                                videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                                completed: false
+                            },
+                            {
+                                id: 2,
+                                title: 'Getting Started with Basics',
+                                duration: '12 min',
+                                videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+                                completed: false
+                            },
+                            {
+                                id: 3,
+                                title: 'Core Concepts Explained',
+                                duration: '18 min',
+                                videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+                                completed: false
+                            }
+                        ];
+                    }
+
+                    renderLessons();
+                    loadLesson(0);
+                }
+            });
+
+            function renderLessons() {
+                const container = $('#lesson-list');
+                container.empty();
+
+                lessons.forEach((lesson, index) => {
+                    const isActive = index === currentLessonIndex;
+                    const icon = lesson.completed ? 'fa-check-circle' : (isActive ? 'fa-play-circle' : 'fa-circle');
+                    const iconColor = lesson.completed ? 'color: #10b981;' : '';
+
+                    const item = `
+                        <div class="lesson-item ${isActive ? 'active' : ''}" data-index="${index}">
+                            <i class="fas ${icon}" style="margin-top: 4px; ${iconColor}"></i>
+                            <div>
+                                <div style="font-weight: 500;">${lesson.title}</div>
+                                <div style="font-size: 0.8rem; color: #64748b;">${lesson.duration}</div>
+                            </div>
+                        </div>
+                    `;
+                    container.append(item);
+                });
+
+                updateProgress();
+            }
+
+
+            function loadLesson(index) {
+                currentLessonIndex = index;
+                const lesson = lessons[index];
+                const videoContainer = $('#video-container');
+
+                // Check if it's a YouTube URL
+                const youtubeRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+                const match = lesson.videoUrl.match(youtubeRegex);
+
+                if (match && match[1]) {
+                    // YouTube video - use iframe
+                    const videoId = match[1];
+                    videoContainer.html(`
+                        <div style="position: relative; width: 100%; height: 100%;">
+                            <iframe id="youtube-player" 
+                                width="100%" 
+                                height="100%" 
+                                src="https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen
+                                style="width: 100%; height: 100%;">
+                            </iframe>
+                            <button id="mark-complete-btn" class="btn btn-primary" 
+                                style="position: absolute; bottom: 20px; right: 20px; z-index: 10;">
+                                ✓ Mark as Complete
+                            </button>
+                        </div>
+                    `);
+
+                    // For YouTube, we'll mark as complete after a delay (since we can't detect video end easily without YouTube API)
+                    // In production, you'd use YouTube IFrame API for proper event handling
+                } else {
+                    // Regular video file - use HTML5 video player
+                    videoContainer.html(`
+                        <video id="video-player" controls style="width: 100%; max-width: 100%; height: auto; max-height: 100%;">
+                            <source id="video-source" src="${lesson.videoUrl}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    `);
+
+                    // Re-attach video end event for regular videos
+                    $('#video-player').on('ended', handleVideoEnd);
+                }
+
+                // Update UI
+                renderLessons();
+            }
+
+            function updateProgress() {
+                const completed = lessons.filter(l => l.completed).length;
+                const percentage = Math.round((completed / lessons.length) * 100);
+                $('#progress-text').text(`${percentage}% Completed`);
+            }
+
+            // Lesson click handler
+            $(document).on('click', '.lesson-item', function () {
+                const index = $(this).data('index');
+                loadLesson(index);
+            });
+
+            // Handle video end (extracted for reuse)
+            function handleVideoEnd() {
+                lessons[currentLessonIndex].completed = true;
+
+                // Calculate and update progress
+                updateProgressToServer();
+
+                // Auto-play next lesson if available
+                if (currentLessonIndex < lessons.length - 1) {
+                    setTimeout(() => {
+                        loadLesson(currentLessonIndex + 1);
+                    }, 1000);
+                } else {
+                    alert('🎉 Congratulations! You have completed all lessons in this course!');
+                }
+
+                renderLessons();
+            }
+
+            // Mark lesson as completed when video ends (for regular videos)
+            $(document).on('ended', '#video-player', handleVideoEnd);
+
+            // Manual complete button for YouTube videos (since we can't easily detect end)
+            $(document).on('click', '#mark-complete-btn', function () {
+                handleVideoEnd();
+            });
+
+            // Update progress to server
+            function updateProgressToServer() {
+                const completed = lessons.filter(l => l.completed).length;
+                const percentage = Math.round((completed / lessons.length) * 100);
+
+                $.ajax({
+                    url: 'http://localhost:3000/api/enrollment/progress',
+                    method: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        userId: user.id,
+                        courseId: courseId,
+                        progress: percentage
+                    }),
+                    success: function (res) {
+                        console.log('Progress updated:', res.progress + '%');
+                    },
+                    error: function (err) {
+                        console.error('Failed to update progress', err);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
