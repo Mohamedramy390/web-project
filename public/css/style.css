@@ -512,3 +512,385 @@ footer {
         font-size: 2.5rem;
     }
 }
+
+/* =========================================
+   Float Layout (Merged)
+   ========================================= */
+.float-wrapper {
+    margin-top: 2rem;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1rem;
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.float-content {
+    float: left;
+    width: 65%;
+    padding-right: 1rem;
+}
+
+.float-sidebar {
+    float: right;
+    width: 30%;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+@media (max-width: 768px) {
+
+    .float-content,
+    .float-sidebar {
+        float: none;
+        width: 100%;
+    }
+
+    .float-sidebar {
+        margin-top: 1rem;
+    }
+}
+
+/* =========================================
+   Common Dashboard Elements
+   ========================================= */
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.bg-blue-100 {
+    background-color: #dbeafe;
+    color: #2563eb;
+}
+
+.bg-green-100 {
+    background-color: #dcfce7;
+    color: #16a34a;
+}
+
+.bg-purple-100 {
+    background-color: #f3e8ff;
+    color: #9333ea;
+}
+
+.bg-red-100 {
+    background-color: #fee2e2;
+    color: #dc2626;
+}
+
+.bg-orange-100 {
+    background-color: #ffedd5;
+    color: #ea580c;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Tables */
+.table-container {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    background-color: #f8fafc;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* Badges */
+.role-badge,
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.role-admin {
+    background-color: #fee2e2;
+    color: #dc2626;
+}
+
+.role-instructor {
+    background-color: #f3e8ff;
+    color: #9333ea;
+}
+
+.role-student {
+    background-color: #dbeafe;
+    color: #2563eb;
+}
+
+.status-active {
+    background-color: #dcfce7;
+    color: #16a34a;
+}
+
+.status-draft {
+    background-color: #f1f5f9;
+    color: #64748b;
+}
+
+/* Dashboard Sections & Animations */
+.dashboard-section {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.dashboard-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sidebar-menu a {
+    cursor: pointer;
+}
+
+/* =========================================
+   Modals
+   ========================================= */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+/* =========================================
+   Course Detail
+   ========================================= */
+.course-header {
+    background-color: #1e293b;
+    color: white;
+    padding: 4rem 0;
+}
+
+.course-header h1 {
+    color: white;
+}
+
+.course-header p {
+    color: #cbd5e1;
+}
+
+.lesson-list {
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.lesson-list .lesson-item {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.lesson-list .lesson-item:last-child {
+    border-bottom: none;
+}
+
+.lesson-list .lesson-item:hover {
+    background-color: #f8fafc;
+}
+
+.lesson-title {
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.enroll-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-lg);
+    position: sticky;
+    top: 100px;
+    border: 1px solid var(--border-color);
+}
+
+.price {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.instructor-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.instructor-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* =========================================
+   Course Player
+   ========================================= */
+.player-layout {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    height: calc(100vh - 70px);
+}
+
+.video-section {
+    background: #0f172a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-direction: column;
+}
+
+.player-layout .sidebar {
+    background: white;
+    border-left: 1px solid var(--border-color);
+    overflow-y: auto;
+}
+
+.player-layout .lesson-item {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.player-layout .lesson-item:hover {
+    background: #f8fafc;
+}
+
+.player-layout .lesson-item.active {
+    background: #e0f2fe;
+    color: var(--primary-color);
+    border-left: 4px solid var(--primary-color);
+}
+
+/* =========================================
+   Student Dashboard
+   ========================================= */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--success-color);
+    border-radius: 4px;
+}
+
+/* =========================================
+   Authentication
+   ========================================= */
+.error-message {
+    color: red;
+    font-size: 0.8rem;
+    display: none;
+    margin-top: 5px;
+}
+
+input.invalid {
+    border-color: red;
+}

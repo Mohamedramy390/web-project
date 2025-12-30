@@ -99,7 +99,55 @@ app.post('/api/balance/add', (req, res) => {
     });
 });
 
-// --- COURSE ROUTES ---
+// --- ADMIN ROUTES ---
+
+app.get('/api/stats', (req, res) => {
+    const stats = {
+        uptime: '99.9%'
+    };
+
+    // Parallel queries
+    db.serialize(() => {
+        db.get("SELECT COUNT(*) as count FROM users", (err, row) => {
+            if (err) return res.status(500).json({ success: false });
+            stats.totalUsers = row.count;
+
+            db.get("SELECT COUNT(*) as count FROM courses", (err, row) => {
+                if (err) return res.status(500).json({ success: false });
+                stats.totalCourses = row.count;
+
+                // Simple revenue calculation (price * students for all courses)
+                db.all("SELECT price, students FROM courses", (err, rows) => {
+                    if (err) return res.status(500).json({ success: false });
+                    const revenue = rows.reduce((acc, c) => acc + ((c.price || 0) * (c.students || 0)), 0);
+                    stats.totalRevenue = revenue;
+
+                    res.json({ success: true, stats });
+                });
+            });
+        });
+    });
+});
+
+app.get('/api/users', (req, res) => {
+    db.all("SELECT id, name, email, role, bio FROM users", [], (err, rows) => {
+        if (err) return res.status(500).json({ success: false, message: "Failed to fetch users" });
+        // Add joinedDate mock if not in DB, assuming DB doesn't have it based on register logic
+        // The register logic (line 53) doesn't insert a date.
+        // We can mock it or leave it empty.
+        const users = rows.map(u => ({ ...u, joinedDate: '2023-01-01' }));
+        res.json(users);
+    });
+});
+
+app.delete('/api/users/:id', (req, res) => {
+    const id = req.params.id;
+    db.run("DELETE FROM users WHERE id = ?", [id], function (err) {
+        if (err) return res.status(500).json({ success: false, message: "Delete failed" });
+        res.json({ success: true });
+    });
+});
+
 
 app.get('/api/courses', (req, res) => {
     db.all("SELECT * FROM courses", [], (err, rows) => {
@@ -246,7 +294,13 @@ app.get('/api/instructor/courses', (req, res) => {
     const name = req.query.name;
     db.all("SELECT * FROM courses WHERE instructor = ?", [name], (err, rows) => {
         if (err) return res.status(500).json({ success: false });
-        res.json(rows);
+        // Parse videos json
+        const courses = rows.map(c => {
+            let videos = [];
+            try { videos = c.videos ? JSON.parse(c.videos) : []; } catch (e) { }
+            return { ...c, videos };
+        });
+        res.json(courses);
     });
 });
 

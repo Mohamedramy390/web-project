@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnSpace Presentation</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #1f2937;
+            --bg-color: #f3f4f6;
+            --slide-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            scroll-snap-type: y mandatory;
+            height: 100vh;
+        }
+
+        .slide {
+            height: 100vh;
+            width: 100%;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            background: var(--slide-bg);
+            border-bottom: 5px solid var(--primary-color);
+            position: relative;
+        }
+
+        .slide:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+        }
+
+        p,
+        li {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        ul {
+            list-style-position: inside;
+            display: inline-block;
+            text-align: left;
+        }
+
+        .role {
+            font-size: 1.25rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.9rem;
+            color: #9ca3af;
+        }
+
+        .highlight {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* Animations */
+        .slide .container {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Title Slide -->
+    <div class="slide" id="title">
+        <div class="container">
+            <h1>LearnSpace</h1>
+            <p style="text-align: center;">Project Presentation</p>
+            <div style="margin-top: 3rem;">
+                <p style="text-align: center; font-weight: bold;">Presenter</p>
+                <p style="text-align: center;">Mohamed Ramy</p>
+
+                <p style="text-align: center; font-weight: bold; margin-top: 2rem;">Supervisors</p>
+                <p style="text-align: center;">Dr. Ahmed Anter</p>
+                <p style="text-align: center;">Your TA</p>
+            </div>
+            <div class="footer">Slide 1/8</div>
+        </div>
+    </div>
+
+    <!-- Introduction -->
+    <div class="slide" id="intro">
+        <div class="container">
+            <h2>Introduction</h2>
+            <p><strong>LearnSpace</strong> is a comprehensive web-based educational platform designed to streamline the
+                academic experience.</p>
+            <p>It bridges the gap between instructors and students by providing tools for:</p>
+            <ul>
+                <li>Course Management</li>
+                <li>Progress Tracking</li>
+                <li>Announcements & Communication</li>
+                <li>Resource Distribution</li>
+            </ul>
+            <div class="footer">Slide 2/8</div>
+        </div>
+    </div>
+
+    <!-- Problem Statement -->
+    <div class="slide" id="problem">
+        <div class="container">
+            <h2>Problem Statement</h2>
+            <ul>
+                <li><strong>Fragmentation:</strong> Academic resources and grades are often scattered across different
+                    systems.</li>
+                <li><strong>Communication Gap:</strong> Students miss critical announcements or deadlines.</li>
+                <li><strong>Accessibility:</strong> Need for a unified, responsive interface accessible from any device.
+                </li>
+            </ul>
+            <p style="margin-top: 2rem;">LearnSpace addresses these by centralizing all academic activities into a
+                single, intuitive dashboard.</p>
+            <div class="footer">Slide 3/8</div>
+        </div>
+    </div>
+
+    <!-- Market Analysis -->
+    <div class="slide" id="market">
+        <div class="container">
+            <h2>Market & Related Systems</h2>
+            <p>The E-learning market is rapidly expanding, driven by remote education needs.</p>
+            <p><strong>Related Systems:</strong></p>
+            <ul>
+                <li>Global Leaders: <em>Coursera, Udemy, edX</em></li>
+                <li>LMS Competitors: <em>Moodle, Blackboard, Canvas</em></li>
+            </ul>
+            <p style="margin-top: 2rem;"><strong>Our Niche:</strong> A lightweight, university-focused solution that
+                prioritizes simple user experience over complex enterprise features.</p>
+            <div class="footer">Slide 4/8</div>
+        </div>
+    </div>
+
+    <!-- Methodology -->
+    <div class="slide" id="methodology">
+        <div class="container">
+            <h2>Methodology</h2>
+            <p>The development followed an agile approach with a focus on:</p>
+            <ul>
+                <li><strong>Frontend-First Design:</strong> Prioritizing UX/UI with responsive Flexbox/Grid layouts.
+                </li>
+                <li><strong>Restful API Integration:</strong> Decoupling frontend and backend using AJAX and JSON.</li>
+                <li><strong>Validation:</strong> Robust client-side and server-side validation for data integrity.</li>
+            </ul>
+            <div class="footer">Slide 5/8</div>
+        </div>
+    </div>
+
+    <!-- Architecture -->
+    <div class="slide" id="architecture">
+        <div class="container">
+            <h2>Proposed Architecture</h2>
+            <ul>
+                <li><strong>Frontend:</strong> HTML5, CSS3 (Custom), JavaScript (Vanilla/jQuery).</li>
+                <li><strong>Backend:</strong> Node.js with Express framework.</li>
+                <li><strong>Database:</strong> JSON-based storage (simulating a NoSQL document store).</li>
+                <li><strong>Data Flow:</strong> Client &#8594; AJAX Request &#8594; Express Route &#8594; Controller
+                    &#8594; JSON DB.</li>
+            </ul>
+            <div class="footer">Slide 6/8</div>
+        </div>
+    </div>
+
+    <!-- Results -->
+    <div class="slide" id="results">
+        <div class="container">
+            <h2>Results</h2>
+            <p>The web-based system has been successfully implemented with:</p>
+            <ul>
+                <li>Functional <strong>Student & Admin Dashboards</strong>.</li>
+                <li>Dynamic <strong>Course Player</strong> with video capability.</li>
+                <li>Real-time <strong>Enrollment System</strong>.</li>
+            </ul>
+            <p style="margin-top: 2rem; font-style: italic; color: var(--primary-color);">* Please refer to the
+                accompanying video demonstration for live system walkthrough.</p>
+            <div class="footer">Slide 7/8</div>
+        </div>
+    </div>
+
+    <!-- Future Work -->
+    <div class="slide" id="future">
+        <div class="container">
+            <h2>Future Work</h2>
+            <ul>
+                <li><strong>Database Migration:</strong> Transition from JSON files to MongoDB or SQL for scalability.
+                </li>
+                <li><strong>Real-time Features:</strong> Chat system and live video streaming.</li>
+                <li><strong>AI Integration:</strong> Personalized course recommendations.</li>
+                <li><strong>Mobile App:</strong> Native application using React Native.</li>
+            </ul>
+            <div class="footer">Slide 8/8</div>
+        </div>
+    </div>
+
+</body>
+
+</html>
